@@ -1,3 +1,4 @@
+import java.util.Collections;
 class Population
 {
   Dot[] dots;
@@ -22,6 +23,9 @@ class Population
       dots[i].show();
     }
     dots[0].show();
+    fill(50);
+    String g = "Gen:" + generation;
+    text(g, 10, 10, 30, 30);
   }
   
   //------------------------------------
@@ -67,7 +71,7 @@ class Population
   
   //-----------------------------------
   
-  void naturalSelection()
+  void naturalSelection1()
   {
     Dot[] newDots = new Dot[dots.length];
     setBestDot();
@@ -82,6 +86,33 @@ class Population
       
       // get baby from them
       newDots[i] = parent.gimmeBaby();
+    }
+    
+    dots = newDots.clone();
+    generation++;
+  }
+  //-----------------------------------
+  // My new selection method
+  void naturalSelection2()
+  {
+    Dot[] newDots = new Dot[dots.length];
+    setBestDot();
+    calculateFitnessSum();
+    
+    newDots = dots.clone();
+    
+    //newDots.sort(Comparator.comparing(Dot::getFitness));
+    //Collections.sort(newDots, Comparator(Dot.getFitness()));
+    newDots[0] = dots[bestDot].gimmeBaby();
+    newDots[0].isBest = true;
+    for(int i = 1; i < newDots.length; i++)
+    {
+      // Select parents based on fitness
+      Dot parent1 = selectParent();
+      Dot parent2 = selectParent();
+      
+      // get baby from them
+      //newDots[i] = parent.gimmeBaby();
     }
     
     dots = newDots.clone();

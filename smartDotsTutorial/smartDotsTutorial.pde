@@ -4,7 +4,7 @@ PVector goal = new PVector(400, 10);
 
 void setup()
 {
-  size(800, 800);
+  size(800, 700);
   test = new Population(1000);
 }
 
@@ -18,12 +18,14 @@ void draw()
   rect(0, 200, 150, 10);
   rect(200, 200, 400, 10);
   rect(650, 200, 150, 10);
+  rect(0, 500, 375, 10);
+  rect(425, 500, 375, 10);
   
   if(test.allDotsDead())
   {
     // Genetic algorithm
     test.calculateFitness();
-    test.naturalSelection();
+    test.naturalSelection1();
     test.mutateDemBabies();
   }
   else

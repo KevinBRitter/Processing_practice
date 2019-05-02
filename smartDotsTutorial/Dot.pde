@@ -11,7 +11,7 @@ class Dot
   
   Dot()
   {
-    brain = new Brain(400);
+    brain = new Brain(300);
     
     pos = new PVector(width/2, height - 10);
     vel = new PVector(0, 0);
@@ -81,9 +81,19 @@ class Dot
       {
         isDead = true;
       }
+      else if(pos.x < 375 && pos.y > 500 && pos.y < 510)
+      {
+        isDead = true;
+      }
+      else if(pos.x > 425 && pos.y > 500 && pos.y < 510)
+      {
+        isDead = true;
+      }
   //rect(0, 200, 150, 10);
   //rect(200, 200, 400, 10);
   //rect(650, 200, 150, 10);
+  //rect(0, 500, 375, 10);
+  //rect(425, 500, 375, 10);
     }
   }
   
@@ -109,5 +119,9 @@ class Dot
     Dot baby = new Dot();
     baby.brain = brain.clone();
     return baby;
+  }
+  float getFitness()
+  {
+    return fitness;
   }
 }
