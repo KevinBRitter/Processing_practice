@@ -11,7 +11,7 @@ class Dot
   
   Dot()
   {
-    brain = new Brain(400);
+    brain = new Brain(200);
     
     pos = new PVector(width/2, height - 10);
     vel = new PVector(0, 0);
