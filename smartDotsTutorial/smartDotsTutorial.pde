@@ -5,7 +5,7 @@ PVector goal = new PVector(400, 10);
 void setup()
 {
   size(800, 800);
-  test = new Population(20);
+  test = new Population(800);
 }
 
 void draw()
