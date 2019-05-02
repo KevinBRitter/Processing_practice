@@ -19,6 +19,8 @@ void draw()
   rect(200, 200, 400, 10);
   rect(650, 200, 150, 10);
   
+  rect(200, 400, 200, 10);
+  
   if(test.allDotsDead())
   {
     // Genetic algorithm

@@ -81,6 +81,11 @@ class Dot
       {
         isDead = true;
       }
+      else if(pos.x > 200 && pos.x < 400 && pos.y > 400 && pos.y < 410)
+      {
+        isDead = true;
+      }
+  //rect(200, 400, 200, 10);
   //rect(0, 200, 150, 10);
   //rect(200, 200, 400, 10);
   //rect(650, 200, 150, 10);
