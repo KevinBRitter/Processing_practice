@@ -120,6 +120,9 @@ class Dot
     baby.brain = brain.clone();
     return baby;
   }
+  
+  //----------------------------------
+  
   float getFitness()
   {
     return fitness;

@@ -1,4 +1,3 @@
-import java.util.Collections;
 class Population
 {
   Dot[] dots;
@@ -101,16 +100,17 @@ class Population
     
     newDots = dots.clone();
     
-    //newDots.sort(Comparator.comparing(Dot::getFitness));
-    //Collections.sort(newDots, Comparator(Dot.getFitness()));
     newDots[0] = dots[bestDot].gimmeBaby();
     newDots[0].isBest = true;
+    
     for(int i = 1; i < newDots.length; i++)
     {
       // Select parents based on fitness
-      Dot parent1 = selectParent();
-      Dot parent2 = selectParent();
-      
+      int parent1, parent2, parent3;
+      parent1 = selectParent2();
+      parent2 = selectParent2();
+      parent3 = selectParent2();
+
       // get baby from them
       //newDots[i] = parent.gimmeBaby();
     }
@@ -132,7 +132,7 @@ class Population
 
   //-----------------------------------
   
-  Dot selectParent()
+  Dot selectParent1()
   {
     float rand = random(fitnessSum);
     float runningSum = 0;
@@ -146,6 +146,24 @@ class Population
     }
     // Should never get to this point
     return null;
+  }
+  
+    //-----------------------------------
+  
+  int selectParent2()
+  {
+    float rand = random(fitnessSum);
+    float runningSum = 0;
+    for(int i = 0; i < dots.length; i++)
+    {
+      runningSum += dots[i].fitness;
+      if(runningSum > rand)
+      {
+        return i;
+      }
+    }
+    // Should never get to this point
+    //return null;
   }
   
   //-----------------------------------
@@ -178,5 +196,30 @@ class Population
     {
       minStep = dots[bestDot].brain.step;
     }
+  }
+  
+  //-----------------------------------
+  
+  Dot worstParent(Dot parent1_, Dot parent2_, Dot parent3_)
+  {
+    Dot worst = new Dot();
+    Dot tempParent1, tempParent2, tempParent3;
+    tempParent1 = parent1_;
+    tempParent2 = parent2_;
+    tempParent3 = parent3_;
+    if(tempParent1.getFitness() <= tempParent2.getFitness() && tempParent1.getFitness() <= tempParent3.getFitness())
+    {
+      worst = tempParent1;
+    }
+    else if(tempParent2.getFitness() <= tempParent1.getFitness() && tempParent2.getFitness() <= tempParent3.getFitness())
+    {
+      worst = tempParent2;
+    }
+    else if(tempParent3.getFitness() <= tempParent1.getFitness() && tempParent3.getFitness() <= tempParent2.getFitness())
+    {
+      worst = tempParent3;
+    }
+    return worst;
+     
   }
 }
