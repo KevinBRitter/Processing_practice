@@ -81,7 +81,7 @@ class Dot
       {
         isDead = true;
       }
-      else if(pos.x > 200 && pos.x < 600 && pos.y > 400 && pos.y < 410)
+      else if(pos.x > 100 && pos.x < 700 && pos.y > 400 && pos.y < 410)
       {
         isDead = true;
       }
