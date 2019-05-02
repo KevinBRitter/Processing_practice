@@ -5,7 +5,7 @@ PVector goal = new PVector(400, 10);
 void setup()
 {
   size(800, 800);
-  test = new Population(1000);
+  test = new Population(20);
 }
 
 void draw()
@@ -19,7 +19,7 @@ void draw()
   rect(200, 200, 400, 10);
   rect(650, 200, 150, 10);
   
-  rect(200, 400, 200, 10);
+  rect(200, 400, 400, 10);
   
   if(test.allDotsDead())
   {
