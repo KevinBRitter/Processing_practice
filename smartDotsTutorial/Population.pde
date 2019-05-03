@@ -2,7 +2,7 @@ class Population
 {
   Dot[] dots;
   float fitnessSum;
-  int generation = 1, bestDot = 0, minStep = 400;
+  int generation = 1, bestDot = 0, minStep = 400, replacements = 0;
   
   Population(int size)
   {
@@ -23,8 +23,9 @@ class Population
     }
     dots[0].show();
     fill(50);
-    String g = "Gen:" + generation;
-    text(g, 10, 10, 30, 30);
+    //String g = "Gen:" + generation;
+    String g = "Children: " + replacements;
+    text(g, 10, 10, 70, 20);
   }
   
   //------------------------------------
@@ -81,7 +82,7 @@ class Population
     for(int i = 1; i < newDots.length; i++)
     {
       // Select parents based on fitness
-      Dot parent = selectParent();
+      Dot parent = selectParent1();
       
       // get baby from them
       newDots[i] = parent.gimmeBaby();
@@ -103,20 +104,32 @@ class Population
     newDots[0] = dots[bestDot].gimmeBaby();
     newDots[0].isBest = true;
     
-    for(int i = 1; i < newDots.length; i++)
-    {
+
       // Select parents based on fitness
       int parent1, parent2, parent3;
       parent1 = selectParent2();
       parent2 = selectParent2();
       parent3 = selectParent2();
-
+      
+      // pick the dot to be replaced
+      int newChild = worstParent(parent1, parent2, parent3);
+    for(int i = 1; i < newDots.length; i++)
+    {
+      if(i == newChild)
+      {
+        newDots[newChild] = newDots[0].gimmeBaby();
+        newDots[newChild].brain.mutate();
+        replacements++;
+      }
+      else
+      {
       // get baby from them
-      //newDots[i] = parent.gimmeBaby();
+        newDots[i] = newDots[i].gimmeBaby();
+      }
     }
     
     dots = newDots.clone();
-    generation++;
+    //generation++;
   }
   
   //-----------------------------------
@@ -163,7 +176,7 @@ class Population
       }
     }
     // Should never get to this point
-    //return null;
+    return 0;
   }
   
   //-----------------------------------
@@ -200,24 +213,24 @@ class Population
   
   //-----------------------------------
   
-  Dot worstParent(Dot parent1_, Dot parent2_, Dot parent3_)
+  int worstParent(int parent1_, int parent2_, int parent3_)
   {
-    Dot worst = new Dot();
+    int worst = 1;
     Dot tempParent1, tempParent2, tempParent3;
-    tempParent1 = parent1_;
-    tempParent2 = parent2_;
-    tempParent3 = parent3_;
+    tempParent1 = dots[parent1_];
+    tempParent2 = dots[parent2_];
+    tempParent3 = dots[parent3_];
     if(tempParent1.getFitness() <= tempParent2.getFitness() && tempParent1.getFitness() <= tempParent3.getFitness())
     {
-      worst = tempParent1;
+      worst = parent1_;
     }
     else if(tempParent2.getFitness() <= tempParent1.getFitness() && tempParent2.getFitness() <= tempParent3.getFitness())
     {
-      worst = tempParent2;
+      worst = parent2_;
     }
     else if(tempParent3.getFitness() <= tempParent1.getFitness() && tempParent3.getFitness() <= tempParent2.getFitness())
     {
-      worst = tempParent3;
+      worst = parent3_;
     }
     return worst;
      

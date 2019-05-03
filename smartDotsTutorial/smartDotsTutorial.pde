@@ -1,11 +1,12 @@
 Population test;
 
 PVector goal = new PVector(400, 10);
+int newGen = 1;
 
 void setup()
 {
-  size(800, 700);
-  test = new Population(1000);
+  size(800, 600);
+  test = new Population(200);
 }
 
 void draw()
@@ -25,12 +26,18 @@ void draw()
   {
     // Genetic algorithm
     test.calculateFitness();
-    test.naturalSelection1();
-    test.mutateDemBabies();
+    test.naturalSelection2();
+    //test.mutateDemBabies();
+    
+    //newGen++;
   }
   else
   {
     test.update();
     test.show();
+    //if(newGen % 1 == 0)
+    //{
+      
+    //}
   }
 }
