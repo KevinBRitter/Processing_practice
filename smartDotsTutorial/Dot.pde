@@ -4,6 +4,7 @@ class Dot
   PVector vel;
   PVector acc;
   Brain brain;
+  Random randNum;
   
   boolean isDead = false, reachedGoal = false, isBest = false;
   
@@ -119,6 +120,24 @@ class Dot
     Dot baby = new Dot();
     baby.brain = brain.clone();
     return baby;
+  }
+  
+  //----------------------------------
+  void newGenes (Brain parent1, Brain parent2)
+  {
+    randNum = new Random();
+    for(int i = 0; i < brain.directions.length; i++)
+    {
+      int rand = randNum.nextInt(2);
+      if(rand == 0)
+      {
+        brain.directions[i] = parent1.directions[i];
+      }
+      else
+      {
+        brain.directions[i] = parent2.directions[i];
+      }
+    }
   }
   
   //----------------------------------

@@ -1,21 +1,30 @@
 Population test;
 
+// goal is the target
+// PVector is an x-y pair
 PVector goal = new PVector(400, 10);
 int newGen = 1;
 
 void setup()
 {
+  // Define window size
   size(800, 600);
-  test = new Population(200);
+  // Create a population of x# of dots
+  test = new Population(1000);
 }
 
 void draw()
 {
+  // draw runs 60 times a second
   background(255);
+  // draw the goal rgb
   fill(255, 0, 0);
+  // ellipse is (center x, y, x diameter, y diameter)
   ellipse(goal.x, goal.y, 10, 10);
   
+  // draw some walls rgb
   fill(0, 0, 255);
+  // rect is (top left x, y, x length, y length)
   rect(0, 200, 150, 10);
   rect(200, 200, 400, 10);
   rect(650, 200, 150, 10);
@@ -26,8 +35,12 @@ void draw()
   {
     // Genetic algorithm
     test.calculateFitness();
-    test.naturalSelection2();
+    // Code Bullets method
+    //test.naturalSelection1();
     //test.mutateDemBabies();
+        
+    // my method
+    test.naturalSelection2();
     
     //newGen++;
   }
@@ -35,9 +48,5 @@ void draw()
   {
     test.update();
     test.show();
-    //if(newGen % 1 == 0)
-    //{
-      
-    //}
   }
 }
