@@ -1,3 +1,4 @@
+import java.util.Random;
 Population test;
 
 // goal is the target
