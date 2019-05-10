@@ -104,12 +104,14 @@ class Dot
   {
     if(reachedGoal)
     {
-      fitness = 1.0/16.0 + 10000.0/(float)(brain.step*brain.step);
+      fitness = 1.0/16.0 + 10000.0/(float)(brain.step);
     }
     else
     {
       float distanceToGoal = dist(pos.x, pos.y, goal.x, goal.y);
-      fitness = 1.0/(distanceToGoal*distanceToGoal);
+      float distanceFromSpawn = dist(pos.x, pos.y, spawn.x, spawn.y);
+      //fitness = 1.0/(distanceToGoal*distanceToGoal) - 1/(distanceFromSpawn*distanceFromSpawn);
+      fitness = 1.0 / (distanceToGoal/distanceFromSpawn);
     }
   }
     

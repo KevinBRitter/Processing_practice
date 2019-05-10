@@ -4,6 +4,7 @@ Population test;
 // goal is the target
 // PVector is an x-y pair
 PVector goal = new PVector(400, 10);
+PVector spawn = new PVector(400, 590);
 int newGen = 1;
 
 void setup()
@@ -31,6 +32,8 @@ void draw()
   rect(650, 200, 150, 10);
   rect(0, 500, 375, 10);
   rect(425, 500, 375, 10);
+  noFill();
+  //arc(400, 10, 400, 400, 270, 360, PIE);
   
   if(test.allDotsDead())
   {

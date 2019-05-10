@@ -141,8 +141,12 @@ class Population
       // Select parents based on fitness
       int parent1, parent2, parent3;
       parent1 = selectParent2();
-      parent2 = selectParent2();
-      parent3 = selectParent2();
+      do{
+        parent2 = selectParent2();
+        do{
+          parent3 = selectParent2();
+        }while(parent3 == parent2);
+      }while(parent2 == parent1 || parent3 == parent1);
       
       // pick the dot to be replaced
       int newChild = worstParent(parent1, parent2, parent3);
